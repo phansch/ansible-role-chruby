@@ -3,15 +3,7 @@
   become: true
   action: apt pkg={{ item }} state=installed
   with_items:
-    - git-core
-    - build-essential
-    - libsqlite3-dev
-    - libxslt1-dev
-    - libxml2-dev
-    - zlib1g-dev
-    - libssl-dev
-    - libreadline-dev
-    - libyaml-dev
+    - make
 
 - name: Download chruby
   get_url:
