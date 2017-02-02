@@ -44,7 +44,7 @@
   when: chruby_path.stat.exists == false
 
 - name: Load chruby autoload script contents
-  shell: cat /etc/profile.d/chruby.sh
+  command: cat /etc/profile.d/chruby.sh
   register: autoload_script_contents
   changed_when: false
 
