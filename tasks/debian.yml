@@ -48,7 +48,8 @@
     src: /etc/profile.d/chruby.sh
   register: autoload_script_contents_slurp
 
-- set_fact:
+- name: Decode slurped data
+  set_fact:
     autoload_script_contents: "{{ autoload_script_contents_slurp['content'] | b64decode }}"
 
 - name: Deploy chruby autoload script in /etc/bash.bashrc
