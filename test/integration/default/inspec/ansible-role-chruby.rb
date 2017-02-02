@@ -38,4 +38,12 @@ control "ansible-role-chruby" do
       it { should be_readable.by_user('root') }
       its('mode') { should cmp '0644' }
   end
+
+  describe file('/tmp/chruby-' + version + '.tar.gz') do
+      it { should_not exist }
+  end
+
+  describe directory('/tmp/chruby-' + version) do
+      it { should_not exist }
+  end
 end

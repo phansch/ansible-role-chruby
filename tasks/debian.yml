@@ -15,7 +15,7 @@
 - name:
   set_fact:
     chruby_archive_path: /tmp/chruby-{{ chruby_version }}.tar.gz
-    chruby_archive_destination_path: /tmp/ruby-install-{{ chruby_version }}
+    chruby_archive_destination_path: /tmp/chruby-{{ chruby_version }}
 
 - name: Download chruby
   get_url:
@@ -42,3 +42,13 @@
     src: chruby.sh
     dest: /etc/profile.d/chruby.sh
   when: chruby_path.stat.exists == false
+
+- name: Cleanup chruby package
+  file:
+    path: "{{ chruby_archive_path }}"
+    state: absent
+
+- name: Cleanup chruby package contents
+  file:
+    path: "{{ chruby_archive_destination_path }}"
+    state: absent
