@@ -39,6 +39,15 @@ control "ansible-role-chruby" do
       its('mode') { should cmp '0644' }
   end
 
+  describe file('/etc/bash.bashrc') do
+      it { should exist }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+      it { should be_readable.by_user('root') }
+      its('mode') { should cmp '0644' }
+      its('content') { should match(%r{chruby}) }
+  end
+
   describe file('/tmp/chruby-' + version + '.tar.gz') do
       it { should_not exist }
   end

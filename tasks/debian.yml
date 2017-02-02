@@ -43,6 +43,16 @@
     dest: /etc/profile.d/chruby.sh
   when: chruby_path.stat.exists == false
 
+- name: Load chruby autoload script contents
+  shell: cat /etc/profile.d/chruby.sh
+  register: autoload_script_contents
+  changed_when: false
+
+- name: Deploy chruby autoload script in /etc/bash.bashrc
+  blockinfile:
+    block: "{{ autoload_script_contents.stdout }}"
+    dest: /etc/bash.bashrc
+
 - name: Cleanup chruby package
   file:
     path: "{{ chruby_archive_path }}"
