@@ -1,7 +1,9 @@
 ---
 - name: Ensure required packages are installed (apt)
   become: true
-  action: apt pkg={{ item }} state=installed
+  apt:
+    pkg: "{{ item }}"
+    state: installed
   with_items:
     - make
 
